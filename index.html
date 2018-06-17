@@ -1,0 +1,912 @@
+<html>
+<head>
+    <title>REST API</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+    <style type="text/css">
+        h1.header {
+            letter-spacing: 0px;
+            transform: scaleX(0.95) scaleY(1.2) translate(-10px);
+            border-left: 4px solid #ffffff !important;
+        }
+        div.container {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        pre {
+            overflow: hidden;
+        }
+        .bg-primary {
+            background-color: #10a8ae !important;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="container">          
+        <div class="row">
+            <div class="col-9 pt-5 bg-primary">
+                <h1 class="text-white text-uppercase header pl-2"><b>REST API</b></h1>
+            </div>
+            <div class="col-3 pt-4 pb-4 bg-light">
+                <svg xmlns="http://www.w3.org/2000/svg" width="180" viewBox="0 0 268.215 91.804"><path fill="#333232" d="M13.652 70.854l4.767 11.053H8.921l4.731-11.053zm-2.275-4.693L0 91.443h4.839l2.493-5.851h12.641l2.528 5.851h4.912L16 66.161h-4.623zM41.103 78.802c0-7.549 5.779-13.001 13.544-13.001 4.118 0 7.657 1.479 10.005 4.225l-3.034 2.854c-1.842-1.987-4.118-2.963-6.754-2.963-5.237 0-9.029 3.684-9.029 8.885 0 5.2 3.792 8.885 9.029 8.885 2.636 0 4.912-.976 6.754-2.997l3.034 2.889c-2.348 2.745-5.887 4.226-10.041 4.226-7.73-.001-13.508-5.454-13.508-13.003M97.664 85.593H85.022l-2.492 5.851h-4.839L89.069 66.16h4.623l11.412 25.283h-4.912l-2.528-5.85zm-1.553-3.686l-4.768-11.052-4.731 11.052h9.499zM120.961 66.161h11.052c8.198 0 13.797 5.057 13.797 12.641s-5.599 12.641-13.797 12.641h-11.052V66.161zm10.835 21.309c5.635 0 9.282-3.431 9.282-8.668s-3.647-8.668-9.282-8.668h-6.14V87.47h6.14zM182.397 87.507v3.936h-18.961V66.16h18.456v3.938h-13.761v6.574h12.208v3.863h-12.208v6.972zM223.5 91.443l-.036-16.759-8.307 13.869h-2.095l-8.307-13.652v16.542h-4.478V66.161h3.865l10.04 16.758 9.86-16.758h3.865l.034 25.282zM258.318 82.521v8.922h-4.694v-8.849l-9.933-16.433h5.021l7.404 12.317 7.476-12.317h4.623z"/><path fill="#0EA8AE" d="M89.984 24.518c-1.739-.956-3.476-1.433-5.211-1.433-1.751 0-3.502.498-5.26 1.494s-3.11 2.368-4.058 4.118c-.949 1.75-1.422 3.645-1.422 5.686 0 1.895.464 3.705 1.398 5.432.93 1.725 2.267 3.083 4.011 4.08 1.74.995 3.524 1.496 5.356 1.496s3.595-.482 5.298-1.446c1.699-.967 3.032-2.323 3.998-4.071.961-1.747 1.443-3.652 1.443-5.709 0-2.09-.489-3.981-1.467-5.674-.983-1.695-2.346-3.018-4.086-3.973"/><path fill="#0EA8AE" d="M106.33 0H8.539C3.83 0 0 3.83 0 8.538v41.85c0 4.707 3.83 8.535 8.539 8.535h97.792c4.709 0 8.54-3.828 8.54-8.535V8.538C114.869 3.829 111.037 0 106.33 0M21.62 47.867h-3.475V20.653h3.475v27.214zm0-30.568h-3.475v-6.268h3.475v6.268zm30.423 30.568h-3.476V32.898c0-2.185-.395-4.029-1.177-5.527-.786-1.497-1.868-2.588-3.245-3.268-1.378-.682-2.746-1.02-4.107-1.02-1.442 0-2.864.376-4.264 1.129-1.4.755-2.45 1.86-3.148 3.317-.695 1.475-1.045 3.265-1.045 5.37v14.968h-3.473V20.652h3.473v3.475h.098c1.894-2.785 4.771-4.179 8.626-4.179 1.832 0 3.487.333 4.97.998a11.619 11.619 0 0 1 3.899 2.842c.73.826 1.33 1.87 1.799 3.135.712 1.846 1.07 3.839 1.07 5.975v14.969zm8.359 0V23.788h-4.228v-3.136h4.228c.063-1.944.266-3.482.606-4.616a7.14 7.14 0 0 1 1.762-2.977c.834-.851 1.897-1.495 3.195-1.931 1.297-.436 2.925-.679 4.884-.73v3.233c-1.878.032-3.321.325-4.326.875a4.747 4.747 0 0 0-2.163 2.429c-.324.763-.486 2.002-.486 3.718h6.974v3.136h-6.974v24.078h-3.472zm36.703-6.584c-1.272 2.285-3.029 4.062-5.272 5.335-2.246 1.271-4.597 1.906-7.06 1.906-1.751 0-3.422-.308-5.018-.924a13.792 13.792 0 0 1-4.241-2.564c-1.232-1.091-2.188-2.207-2.867-3.34a14.931 14.931 0 0 1-1.556-3.559 13.386 13.386 0 0 1-.535-3.705c0-2.043.373-3.938 1.118-5.688.744-1.75 1.734-3.24 2.965-4.471a14.801 14.801 0 0 1 4.082-2.916 13.68 13.68 0 0 1 6.075-1.408c2.43 0 4.767.636 7.01 1.907 2.244 1.271 4.004 3.049 5.285 5.334 1.281 2.282 1.919 4.633 1.919 7.046.001 2.415-.634 4.764-1.905 7.047M121.69 34.815h9.442c0 4.264 4.263 4.972 6.396 5.075 1.776 0 4.313-.406 4.313-2.539 0-3.958-19.491-2.283-19.491-15.225 0-7.511 7.109-10.911 12.081-10.911 4.261 0 8.577 1.369 10.608 5.177l.504-4.264h8.73v12.738h-9.187c0-3.756-2.943-5.887-6.495-5.887-1.472 0-3.501.914-3.501 2.69 0 5.228 20.099 4.009 20.099 15.938 0 7.917-7.411 10.761-13.45 10.761-5.124 0-8.681-2.387-10.606-4.672l-.559 3.908h-8.882V34.815h-.002zM157.725 47.604v-6.648h2.133v-24.82h-2.133V9.54h12.282v15.836c.559-.915 4.265-4.062 7.969-4.062 7.869 0 8.884 5.836 8.884 11.165v8.477h2.384v6.648H176.2V33.8c0-1.727 0-4.721-2.995-4.721-2.589 0-3.198 2.539-3.198 4.721v7.156h3.654v6.648h-15.936zM191.831 24.36c2.031-1.218 6.396-3.604 11.065-3.604 6.091 0 13.754 2.284 13.754 10.456v9.895h3.045v6.496h-10.862l-1.215-2.282c-1.879 2.589-5.025 3.25-6.854 3.25-4.821 0-9.999-2.59-9.999-8.479 0-5.735 4.823-9.338 10.558-9.338 2.994 0 4.771 1.47 5.024 1.774v-1.774c0-2.284-2.081-2.844-4.822-2.844-2.994 0-5.635 1.269-7.563 2.334l-2.131-5.884zm14.517 14.008c-.152-.254-.863-1.473-2.993-1.473-2.03 0-2.944 1.118-2.944 2.692 0 1.419 1.166 2.385 2.688 2.385 1.523 0 2.792-.913 3.25-1.675v-1.929zM221.725 47.604v-6.648h2.235v-12.13h-2.185v-6.597h9.541l1.523 3.247c1.317-2.436 2.639-4.516 7.866-4.516v9.136c-4.566 0-7.156 1.165-7.156 5.633v5.227h2.539v6.648h-14.363zM268.216 44.104c-3.76 3.249-7.817 4.414-13.096 4.414-6.294 0-13.399-4.009-13.399-13.754 0-8.322 5.989-13.247 13.652-13.247 6.041 0 10.662 3.095 12.132 7.36.606 1.776 1.167 5.685.101 8.577h-15.988c.305 1.372.965 4.165 5.229 4.165 1.728 0 4.366-.154 7.106-2.438l4.263 4.923zm-8.781-11.673c-.05-1.931-.506-4.063-3.755-4.063-3.098 0-3.808 2.793-3.908 4.063h7.663z"/></svg>
+            </div>
+        </div>
+        <div class="row bg-primary">
+        </div>
+        <div class="row bg-primary">
+            <div class="col-12 p-0">
+                <div class="col-12 bg-light pb-2">
+                    <div class="row pt-4 ">
+                        <div class="col-12">
+                            <div class="alert alert-success">
+                                We wszystkich zadaniach (jeśli nie jest napisane inaczej) do połączenia z zewnętrznym API użyj natywnej funkcji przeglądarki - <code>fetch</code>.
+                                Jej dokumentacja znajduję sie <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" target="_blank">tutaj</a>.
+                            </div>
+                            <div class="alert alert-success">
+                                We wszystkich zadaniach (jeśli nie jest napisane inaczej) łączymy się z bazą danych Firebase którą została stworzona na warsztatach.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pt-2 pb-4 task-row">
+                        <div class="col-12">
+                            <h4>Zadanie nr 1</h4>
+                            <p>
+                                Do obiektu <code>ApiClient</code> dopisz metodę <code>sendRequest(method, resource, data)</code>, która będzie przyjmować 3 argumenty:
+                                <ul>
+                                    <li>
+                                        <code>method</code> - metodę żadania HTTP
+                                    </li>
+                                    <li>
+                                        <code>resource</code> - zasób, na którym chcemy wykonać daną akcję (np. <code>/users</code>, <code>/users/123/comments/1</code>)
+                                    </li>
+                                    <li>
+                                        <code>data</code> - opcjonalne dane, które chcemy wysłać w żądaniu
+                                    </li>
+                                </ul>
+                                Metoda ta, za pomocą funkcji <code>fetch</code> ma wykonać zadane żadanie i zwrócić obiekt <code>Promise</code>, który po wykonniu zwróci sparsowaną (z formatu JSON) odpowiedź z API.
+                            </p>
+                            <div class="alert alert-success">
+                                Pamiętaj o tym aby na konieć adresu, z którym bedziesz chciał się połączyć dopisać <code>.json</code> - bez tego Firebase nie zwróci poprawnej odpowiedzi.
+                            </div>
+                            <p>
+                                Działanie metody przetestuj za pomocą formularza poniżej.
+                            </p>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Mini REST Client
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p>Żądanie</p>
+                                            <form id="request-form">
+                                                <div class="form-group">
+                                                    <select name="method" class="form-control">
+                                                        <option>GET</option>
+                                                        <option>POST</option>
+                                                        <option>PUT</option>
+                                                        <option>PATCH</option>
+                                                        <option>DELETE</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="resource" type="text" class="form-control" id="resource" placeholder="Zasób">
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea name="data" class="form-control" rows="4"></textarea>
+                                                </div>
+                                                <br>
+                                                <button id="request-send" type="submit" class="btn btn-primary">Wyślij</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>Odpowiedź</p>
+                                            <pre>
+                                                <code id="request-response" class="json">
+
+                                                </code>
+                                            </pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row pt-2 pb-4 task-row">
+                        <div class="col-12">
+                            <h4>Zadanie nr 2</h4>
+                            <p>
+                                Do obiektu <code>ApiClient</code> dodaj metodę <code>addUser(user)</code>, która przyjmuje 1 argument:
+                                <ul>
+                                    <li>
+                                        <code>user</code> - obiekt użytkownika w formacie podanym poniżej
+                                    </li>
+                                </ul>                                
+                            </p>
+                            <div class="row">
+                                <div class="col-12">
+                                    <pre>
+                                        <code class="json">
+    {
+       "name": "Darth Vader",
+       "email": "darth.vader@deathstar.com",
+       "active": true
+    }
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                            <p>
+                                Metoda ta ma wysyłać żadanie HTTP <code>POST</code> z danymi użytkownika podanymi w argumencie na adres <code>/users</code>.
+                            </p>
+                            <p>
+                                Działanie metody przetestuj za pomocą formularza poniżej.
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Formularz dodawania użytkownika
+                                        </div>
+                                        <div class="card-body">
+                                            <form id="users-add-form">
+                                                <div class="form-group">
+                                                    <input name="name" type="text" class="form-control" id="name" placeholder="Nazwa">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="email" type="email" class="form-control" id="email" placeholder="Email">
+                                                </div>
+                                                <div class="form-check">
+                                                    <input name="active" type="checkbox" class="form-check-input" id="active">
+                                                    <label class="form-check-label" for="active">Aktywny</label>
+                                                </div>
+                                                <br>
+                                                <button id="users-add-btn" type="submit" class="btn btn-primary">Dodaj</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="row pt-2 task-row">
+                        <div class="col-12">
+                            <h4>Zadanie nr 3</h4>
+                            <p>
+                                Do obiektu <code>ApiClient</code> dodaj metodę <code>getUsers()</code>. Metoda ta ma wysyłać żądanie HTTP <code>GET</code> na adres <code>/users</code> i ma zwracać obiekt <code>Promise</code>, który po wykonaniu ma zwrócić obiekt z listą użytkowników.
+                                Działanie metody przetestuj za pomocą tabelki poniżej (przycisk <i>odśwież</i> uruchamia metodę).
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Lista użytkowników  <button id="users-get-btn" class="btn btn-primary" type="button">Odśwież</button>
+                                </div>
+                                <div class="card-body">
+                                    <table id="users-table" class="table table-bordered table-striped table-hover table-responsive-lg">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nazwa</th>
+                                                <th>Email</th>
+                                                <th>Aktywny</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="4">
+                                                    Brak użytkowników - odśwież listę
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                        </div>                        
+                    </div>
+
+                    <div class="row pt-2 task-row">
+                        <div class="col-12">
+                            <h4>Zadanie nr 4</h4>
+                            <p>
+                                Do obiektu <code>ApiClient</code> dodaj metodę <code>putUser(userId, user)</code> przyjmujacą 2 argumenty:
+                                <ul>
+                                    <li>
+                                        <code>userId</code> - id modyfikowanego użytkownika
+                                    </li>
+                                    <li>
+                                        <code>user</code> - obiekt użytkownika o takiej samej strukturze jak w zadaniu nr 2
+                                    </li>
+                                </ul>
+                                
+                                Metoda ta ma wysyłać żądanie HTTP <code>PUT</code> na adres <code>/users/:userId</code> i ma zwracać obiekt <code>Promise</code>, który po wykonaniu ma zwrócić obiekt ze zmodyfikowanym właśne użytkownikiem.
+                                Działanie metody przetestuj za pomocą tabelki poniżej (przycisk <i>odśwież</i> pobiera listę użytkowników, przycisk <i>edytuj</i> otwiera formularz edycji użytkownika).
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Lista użytkowników  <button id="task-4-users-get-btn" class="btn btn-primary" type="button">Odśwież</button>
+                                </div>
+                                <div class="card-body">
+                                    <table id="task-4-users-table" class="table table-bordered table-striped table-hover table-responsive-lg">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nazwa</th>
+                                                <th>Email</th>
+                                                <th>Aktywny</th>
+                                                <th>Akcje</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">
+                                                    Brak użytkowników - odśwież listę
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                        </div>                        
+                    </div>
+                    <div class="row pt-2 task-row">
+                        <div class="col-12">
+                            <h4>Zadanie nr 5</h4>
+                            <p>
+                                Do obiektu <code>ApiClient</code> dodaj metodę <code>deleteUser(userId)</code> przyjmującą 1 argument:
+                                <ul>
+                                    <li>
+                                        <code>userId</code> - id użytkownika do usunięcia
+                                    </li>
+                                </ul>
+                                
+                                Metoda ta ma wysyłać żądanie HTTP <code>DELETE</code> na adres <code>/users/:userId</code>.
+                                Działanie metody przetestuj za pomocą tabelki poniżej (przycisk <i>odśwież</i> pobiera listę użytkowników, przycisk <i>usuń</i> usuwa użytkownika).
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Lista użytkowników  <button id="task-5-users-get-btn" class="btn btn-primary" type="button">Odśwież</button>
+                                </div>
+                                <div class="card-body">
+                                    <table id="task-5-users-table" class="table table-bordered table-striped table-hover table-responsive-lg">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nazwa</th>
+                                                <th>Email</th>
+                                                <th>Aktywny</th>
+                                                <th>Akcje</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">
+                                                    Brak użytkowników - odśwież listę
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                        </div>                        
+                    </div>
+                    <div class="row pt-2 pb-4 task-row">
+                        <div class="col-12">
+                            <h4>Zadanie nr 6</h4>
+                            <p>
+                                Do obiektu <code>ApiClient</code> dodaj metodę <code>addUserPost(userId, post)</code>, która przyjmuje 2 argumenty:
+                                <ul>
+                                    <li>
+                                        <code>userId</code> - Id użytkownika któremu chcemy dodac posta
+                                    </li>
+                                    <li>
+                                        <code>post</code> - obiekt z danymi posta
+                                    </li>
+                                </ul>                                
+                            </p>
+                            <div class="row">
+                                <div class="col-12">
+                                    <pre>
+                                        <code class="json">
+    {
+        "title": "Lorem ipsum",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis fringilla libero. Maecenas lobortis ullamcorper auctor.",
+        "date": "2018-06-15T14:38:53.099Z"
+    }
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                            <p>
+                                Metoda ta ma wysyłać żadanie HTTP <code>POST</code> z ID użytkownika i postem na adres <code>/users/:userId/posts</code>.
+                            </p>
+                            <p>
+                                Działanie metody przetestuj za pomocą formularza poniżej.
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Formularz dodawania posta użytkownika
+                                        </div>
+                                        <div class="card-body">
+                                            <form id="task-6-posts-add-form">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" id="task-6-get-users-btn" class="btn btn-primary">Odśwież</button>
+                                                        </div>
+                                                        <select id="task-6-users-list" class="form-control"></select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="title" type="text" class="form-control" id="title" placeholder="Tytuł">
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea class="form-control" name="body" rows="6"></textarea>
+                                                </div>
+                                                <br>
+                                                <button id="task-6-posts-add-btn" type="submit" class="btn btn-primary">Dodaj</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row pt-2 task-row">
+                        <div class="col-12">
+                            <h4>Zadanie nr 7</h4>
+                            <p>
+                                Do obiektu <code>ApiClient</code> dodaj metodę <code>getUserPosts(userId)</code> przyjmującą 1 argument:
+                                <ul>
+                                    <li>
+                                        <code>userId</code> - id użytkownika do którego posty chcemy pobrać
+                                    </li>
+                                </ul>
+                                
+                                Metoda ta ma wysyłać żądanie HTTP <code>GET</code> na adres <code>/users/:userId/posts</code> i ma zwracać obiekt <code>Promise</code>, który po wykonaniu ma zwrócić listę postów danego użytkownika.
+                                Działanie metody przetestuj za pomocą tabelki poniżej (przycisk <i>odśwież</i> pobiera listę postów dla danego użytkownika).
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <form class="form-inline">
+                                        <label>Lista użytkowników</label>  <button id="task-7-users-get-btn" type="button" class="btn btn-primary">Odśwież</button>
+                                        <div class="input-group">
+                                            <select class="form-control" id="task-7-users-list"></select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-body">
+                                    <table id="task-7-posts-table" class="table table-bordered table-striped table-hover table-responsive-lg">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Data</th>
+                                                <th>Tytuł</th>
+                                                <th>Treść</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="4">
+                                                    Brak postów - odśwież listę
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                        </div>                        
+                    </div>
+                    <div class="mt-5 row">
+                        <div class="col-12 text-center">
+                            <p class="text-muted">&copy; 2018 infoShare Academy</p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="task-4-edit-user-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="task-4-edit-user-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="users-edit-form">
+                        <div class="form-group">
+                            <input name="name" type="text" class="form-control" id="name" placeholder="Nazwa">
+                        </div>
+                        <div class="form-group">
+                            <input name="email" type="email" class="form-control" id="email" placeholder="Email">
+                        </div>
+                        <div class="form-check">
+                            <input name="active" type="checkbox" class="form-check-input" id="edit-user-form-active">
+                            <label class="form-check-label" for="edit-user-form-active">Aktywny</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                    <button id="task-4-save-user" type="button" class="btn btn-primary">Zapisz</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="./tasks.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+
+        $(document).ready(function() {        
+            var client = new ApiClient();
+
+
+            // Zadanie nr 1
+            $('#request-send').off('click').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+
+                var $requestForm = $('#request-form');
+                var method = $requestForm.find('select[name=method]').val();
+                var resource = $requestForm.find('input[name=resource]').val();
+                var data;
+                if ('GET' !== method) {
+                    var json = $requestForm.find('textarea[name=data]').val();
+                    if (json && json !== '') {
+                        try {
+                            data = JSON.parse(json);
+                        } catch (error) {
+                            alert('Nieprawidłowy format danych JSON');
+                        }
+                    }
+                }
+
+                client.sendRequest(method, resource, data)
+                    .then(function (data) {
+                        $('#request-response').html(JSON.stringify(data));
+                    })
+                    .catch(function (error) {
+                        alert(error);
+                    })
+                    ;
+            });
+            ///
+            
+            // Zadanie nr 2
+            $('#users-add-btn').off('click').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var $usersAddForm = $('#users-add-form');
+                $usersAddForm.find('.form-control').removeClass('is-valid');
+                $usersAddForm.find('.form-control').removeClass('is-invalid');
+                
+                var user = {
+                    name: '',
+                    email: '',
+                    active: false
+                };
+                var isValid = true;
+                $usersAddForm.serializeArray().forEach(function (data) {
+                    if (!data.value || data.value == '') {
+                        $usersAddForm
+                            .find('input[name=' + data.name + ']')
+                            .addClass('is-invalid')
+                            .parent()
+                            .append(
+                                $('<div>')
+                                    .addClass('invalid-feedback')
+                                    .html('Ta wartość nie może być pusta')
+                            );
+                        isValid = false;
+                    } else {
+                        if (data.name === 'active') {
+                            user.active = true;
+                        } else {
+                            user[data.name] = data.value;
+                            $usersAddForm
+                                .find('input[name=' + data.name + ']')
+                                .addClass('is-valid')
+                                ;
+                        }
+                    }
+                })
+
+                if (!isValid) {
+                    return;
+                }
+                
+                client.addUser(user)
+                    .then(function () {
+                        alert('Użytkownik został dodany!');
+                    });
+            });
+            ///
+
+            // Zadanie nr 3
+            $('#users-get-btn').off('click').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+
+                var $usersTable = $('#users-table').find('tbody');
+
+                $usersTable.empty();
+                $usersTable.append(
+                    $('<tr>')
+                        .append(
+                            $('<td>')
+                                .attr('colspan', 4)
+                                .html('Ładowanie listy użytkowników...')
+                        )
+                );
+
+                client.getUsers()
+                    .then(function (users) {
+                        $usersTable.empty();
+                        for (var id in users) {
+                            var user = users[id];
+                            $usersTable.append(
+                                $('<tr>')
+                                    .append($('<td>').html(id))
+                                    .append($('<td>').html(user.name))
+                                    .append($('<td>').html(user.email))
+                                    .append($('<td>').html(user.active === true ? 'Tak' : (user.active === false ? 'Nie' : '--')))
+                            );
+                        }
+                    })
+                    .catch(function (error) {
+                        $usersTable.empty();
+                        $usersTable.append(
+                            $('<tr>')
+                                .append(
+                                    $('<td>')
+                                        .attr('colspan', 4)
+                                        .html('Wystapił błąd :( - spróbuj ponownie')
+                                )
+                        );
+                    })
+                    ;
+            });
+            ///
+
+            // Zadanie nr 4
+            $('#task-4-users-get-btn').off('click').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+
+                var $usersTable = $('#task-4-users-table').find('tbody');
+
+                $usersTable.empty();
+                $usersTable.append(
+                    $('<tr>')
+                        .append(
+                            $('<td>')
+                                .attr('colspan', 5)
+                                .html('Ładowanie listy użytkowników...')
+                        )
+                );
+
+                client.getUsers()
+                    .then(function (users) {
+                        $usersTable.empty();
+                        for (var id in users) {
+                            var user = users[id];
+                            $usersTable.append(
+                                $('<tr>')
+                                    .append($('<td>').html(id))
+                                    .append($('<td>').html(user.name))
+                                    .append($('<td>').html(user.email))
+                                    .append($('<td>').html(user.active === true ? 'Tak' : (user.active === false ? 'Nie' : '--')))
+                                    .append(
+                                        $('<button>')
+                                            .addClass('btn btn-primary task-4-edit-user-btn')
+                                            .attr('type', 'button')
+                                            .data('user-id', id)
+                                            .data('user', user)
+                                            .html('Edytuj')
+                                    )
+                            );
+                        }
+                        var $modal = $('#task-4-edit-user-modal');
+                        $usersTable.find('.task-4-edit-user-btn').off('click').on('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+
+
+                            var $button = $(this);
+                            var user = $button.data('user');
+                            var userId = $button.data('user-id');
+                            user.active = false;
+                            $modal.find('input[name=name]').val(user.name);
+                            $modal.find('input[name=email]').val(user.email);
+                            $modal.find('input[name=active]').prop('checked', user.active);
+                            $modal.find('#task-4-edit-user-title').html(user.name + ' (' + userId + ')');
+                            var usersEditForm = $modal.find('#users-edit-form');
+                            $modal.find('#task-4-save-user').off('click').on('click', function () {
+                                var userData = usersEditForm.serializeArray();
+                                var isValid = true;
+                                userData.forEach(function (data) {
+                                    if (data.name === 'active') {
+                                        user.active = true;
+                                    } else {
+                                        user[data.name] = data.value;
+                                    }
+                                });
+
+                                client.putUser(userId, user)
+                                    .then(function () {
+                                        $modal.modal('hide');
+                                    })
+                                    ;
+                            });
+
+                            $modal.modal('show');
+                        });
+
+                        $modal.off('hide.bs.modal').on('hide.bs.modal', function (e) {
+                            $('#task-4-users-get-btn').click();
+                        });
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        $usersTable.empty();
+                        $usersTable.append(
+                            $('<tr>')
+                                .append(
+                                    $('<td>')
+                                        .attr('colspan', 5)
+                                        .html('Wystapił błąd :( - spróbuj ponownie')
+                                )
+                        );
+                    })
+                    ;
+            });
+            ///
+
+            // Zadanie nr 5 
+            $('#task-5-users-get-btn').off('click').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+
+                var $usersTable = $('#task-5-users-table').find('tbody');
+
+                $usersTable.empty();
+                $usersTable.append(
+                    $('<tr>')
+                        .append(
+                            $('<td>')
+                                .attr('colspan', 5)
+                                .html('Ładowanie listy użytkowników...')
+                        )
+                );
+
+                client.getUsers()
+                    .then(function (users) {
+                        $usersTable.empty();
+                        for (var id in users) {
+                            var user = users[id];
+                            $usersTable.append(
+                                $('<tr>')
+                                    .append($('<td>').html(id))
+                                    .append($('<td>').html(user.name))
+                                    .append($('<td>').html(user.email))
+                                    .append($('<td>').html(user.active === true ? 'Tak' : (user.active === false ? 'Nie' : '--')))
+                                    .append(
+                                        $('<button>')
+                                            .addClass('btn btn-danger task-5-delete-user-btn')
+                                            .attr('type', 'button')
+                                            .data('user-id', id)
+                                            .data('user', user)
+                                            .html('Usuń')
+                                    )
+                            );
+                        }
+                        $usersTable.find('.task-5-delete-user-btn').off('click').on('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+
+
+                            var $button = $(this);
+                            var user = $button.data('user');
+                            var userId = $button.data('user-id');
+
+                            if (confirm('Czy na pewno chcesz usunąć użytkownika: ' + user.name + '?')) {
+                                client.deleteUser(userId)
+                                    .then(function () {
+                                        $('#task-5-users-get-btn').click();
+                                    });
+                            }
+                        });
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        $usersTable.empty();
+                        $usersTable.append(
+                            $('<tr>')
+                                .append(
+                                    $('<td>')
+                                        .attr('colspan', 5)
+                                        .html('Wystapił błąd :( - spróbuj ponownie')
+                                )
+                        );
+                    })
+                    ;
+            });
+            ///
+
+            // Zadanie nr 6
+            $usersSelect = $('#task-6-users-list');
+            $('#task-6-get-users-btn').off('click').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                
+                client.getUsers()
+                    .then(function (users) {
+                        $usersList.empty();
+                        for (var id in users) {
+                            var user = users[id];
+                            $usersSelect.append(
+                                $('<option>')
+                                    .html(user.name)
+                                    .val(id)
+                                    .data('user', user)
+                                    .data('user-id', id)
+                            );
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        $usersSelect.empty();
+                        alert('Wystapił błąd :( - spróbuj ponownie');
+
+                    })
+                    ;
+            });
+
+            $('#task-6-posts-add-btn').off('click').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                $addPostsForm = $('#task-6-posts-add-form');
+                
+                var userId = $usersSelect.val();
+                if (!userId) {
+                    alert('Odśwież listę użytkowników!');
+                    return;
+                }
+                                
+                var post = {
+                    title: $addPostsForm.find('input[name=title]').val(),
+                    body: $addPostsForm.find('textarea[name=body]').val(),
+                    date: (new Date()).toISOString(),
+                };
+
+                client.addUserPost(userId, post)
+                    .then(function () {
+                        alert('Dodano post: ' + post.title);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        alert('Wystapił błąd :( - spróbuj ponownie');
+                    })
+                    ;
+            });
+            //
+
+
+            // Zadanie nr 7
+
+            var $usersList = $('#task-7-users-list');
+            var $postsTable = $('#task-7-posts-table').find('tbody');
+            $('#task-7-users-get-btn').off('click').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                
+                client.getUsers()
+                    .then(function (users) {
+                        $usersList.empty();
+                        for (var id in users) {
+                            var user = users[id];
+                            $usersList.append(
+                                $('<option>')
+                                    .html(user.name)
+                                    .val(id)
+                                    .data('user', user)
+                                    .data('user-id', id)
+                            );
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        $usersList.empty();
+                        alert('Wystapił błąd :( - spróbuj ponownie');
+
+                    })
+                    ;
+            });
+
+            $usersList.off('change').on('change', function (e) {
+
+
+
+                var userId = $(e.currentTarget).val();
+
+                client.getUserPosts(userId)
+                    .then(function (posts) {
+                        $postsTable.empty();
+                        if (!posts) {
+                            return;
+                        }
+
+                        for (var id in posts) {
+                            var post = posts[id];
+                            $postsTable.append(
+                                $('<tr>')
+                                    .append($('<td>').html(id))
+                                    .append($('<td>').html(post.date))
+                                    .append($('<td>').html(post.title))
+                                    .append($('<td>').html(post.body))
+                            );
+                        }
+                    });
+            });
+            ///
+           
+        })
+    </script>
+</body>
+</html>
